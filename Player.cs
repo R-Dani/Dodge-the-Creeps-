@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Reflection.Metadata.Ecma335;
 
 public partial class Player : Area2D
 {
@@ -8,7 +9,6 @@ public partial class Player : Area2D
 
 	[Signal]
 	public delegate void HitEventHandler();
-	func _on_body_entered(body):
 
 	public Vector2 ScreenSize; // Tamanio de la ventana del juego //
 
@@ -69,6 +69,21 @@ public partial class Player : Area2D
 			animatedSprite2D.FlipV = velocity.Y > 0;
 		}
     }
+
+	private void OnBodyEntered(Node2D body) // Tambien especificamos este nombre de funcion en PascalCase en la ventana de conexion de editor //
+	{
+		Hide(); // El jugador desaparece tras ser golpeado //
+		EmitSignal(SignalName.Hit);
+		// Debe posponerse porque no podemos cambiar las propiedades de la fisica en una callback de fisica //
+		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+	}
+
+	private void Start(Vector2 position)
+	{
+		Position = position;
+		Show();
+		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+	}
 
 
 }
