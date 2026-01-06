@@ -22,19 +22,19 @@ public partial class Player : Area2D
     {
         var velocity = Vector2.Zero; // Vector de movimiento del jugador //
 
-		if (Input.IsActionJustPressed("right"))
+		if (Input.IsActionPressed("right"))
 		{
 			velocity.X += 1;
 		}
-		if (Input.IsActionJustPressed("left"))
+		if (Input.IsActionPressed("left"))
 		{
 			velocity.X -= 1;
 		}
-		if (Input.IsActionJustPressed("down"))
+		if (Input.IsActionPressed("down"))
 		{
 			velocity.Y += 1;
 		}
-		if (Input.IsActionJustPressed("up"))
+		if (Input.IsActionPressed("up"))
 		{
 			velocity.Y -= 1;
 		}
