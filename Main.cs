@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.ComponentModel;
 
 public partial class Main : Node
 {
@@ -9,15 +10,11 @@ public partial class Main : Node
 
 	private int _score;
 
-	public override void _Ready()
-    {
-        NewGame();
-    }
-
 		public void GameOver()
 	{
 		GetNode<Timer>("MobTimer").Stop();
 		GetNode<Timer>("ScoreTimer").Stop();
+		GetNode<Hud>("HUD").ShowGameOver();
 	}
 
 	public void NewGame()
@@ -28,6 +25,10 @@ public partial class Main : Node
 		var startPosition = GetNode<Marker2D>("StartPosition");
 
 		GetNode<Timer>("StartTimer").Start();
+
+		var hud = GetNode<Hud>("HUD");
+		hud.UpdateScore(_score);
+		hud.ShowMessage("Get Ready!");
 	}
 
 	private void OnMobTimerTimeOut()
@@ -60,6 +61,8 @@ public partial class Main : Node
 	private void OnScoreTimerTimeout()
 	{
 		_score++;
+
+		GetNode<Hud>("HUD").UpdateScore(_score);
 	}
 
 	private void OnStartTimerTimeOut()
@@ -67,7 +70,5 @@ public partial class Main : Node
 		GetNode<Timer>("MobTimer").Start();
 		GetNode<Timer>("ScoreTimer").Start();
 	}
-
-	
 
 }
