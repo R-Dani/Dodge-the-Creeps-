@@ -78,7 +78,7 @@ public partial class Player : Area2D
 		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
 	}
 
-	private void Start(Vector2 position)
+	public void Start(Vector2 position)
 	{
 		Position = position;
 		Show();

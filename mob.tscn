@@ -52,7 +52,6 @@ height = 100.0
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_1qmh0")
-metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
@@ -65,4 +64,4 @@ shape = SubResource("CapsuleShape2D_jbnni")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleScreenNotifier2DScreenExited"]
